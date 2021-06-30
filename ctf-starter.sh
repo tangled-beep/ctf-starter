@@ -7,7 +7,15 @@ read boxname
 echo Enter IP
 read rIP
 
+echo made a new directory! $boxname
+mkdir ~/HTB/$boxname
+cd ~/HTB/$boxname
+
+echo running wordlist gatherer
+python3 ~/ctf-starter/main.py $rIP
 
 
-mkdir
-nmap -sV -sC -oN $rIP nmapscan.txt
+echo running an NMAP scan
+nmap -sV -sC -v $rIP -oN nmapscan.txt
+
+echo all done! complete scan of $rIP for $boxname
