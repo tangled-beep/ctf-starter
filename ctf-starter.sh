@@ -1,21 +1,27 @@
 #!/bin/bash
 
 # ask for box name
-echo Enter name of box of challenge
+printf "Enter name of box of challenge \n"
 read boxname
-#ask for IP
-echo Enter IP
+# ask for IP
+printf "Enter IP \n"
 read rIP
 
-echo made a new directory! $boxname
+printf "\n------------------------- Preparing Env ----------------------------\n\n"
 mkdir ~/HTB/$boxname
 cd ~/HTB/$boxname
+touch scratch.md #for notes/analysis
+printf "=== Made a new directory: $boxname \n"
 
-echo running wordlist gatherer
+printf "=== Checking for HTTP server and running wordlist gatherer\n"
 python3 ~/ctf-starter/main.py $rIP
 
 
-echo running an NMAP scan
+printf "Running a full NMAP scan, default scripts, saving output \n"
 nmap -sV -sC -v $rIP -oN nmapscan.txt
 
-echo all done! complete scan of $rIP for $boxname
+printf "DONE scanned: $rIP for the box: $boxname"
+printf "\n----------------------------------------------------------------------------\n"
+
+printf "\nYour tun0 IP is:\n"
+ip addr show tun0 | grep global
